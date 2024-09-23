@@ -36,6 +36,8 @@ const request_data = {
   };
 
   try {
+    console.log('klk')
+
     // Make the request using only the consumer credentials (no token)
     const response = await fetch(request_data.url, {
       method: request_data.method,
@@ -43,12 +45,14 @@ const request_data = {
         ...oauth.toHeader(oauth.authorize(request_data)),
       },
     });
+    console.log('klk 2')
 
     if (!response.ok) {
       throw new Error(`Error: ${response.statusText}`);
     }
 
     const xmlData = await response.text();
+    console.log('klk 3', xmlData)
     return {
       statusCode: 200,
       body: xmlData,
