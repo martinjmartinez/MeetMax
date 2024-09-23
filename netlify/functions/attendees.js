@@ -48,11 +48,10 @@ const request_data = {
       throw new Error(`Error: ${response.statusText}`);
     }
 
-    const data = await response.json();
-
+    const xmlData = await response.text();
     return {
       statusCode: 200,
-      body: JSON.stringify(data),
+      body: xmlData,
     //   body: data,
 
     };
