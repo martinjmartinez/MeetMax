@@ -4,7 +4,8 @@ const app = express();
 
 const OAuth = require('oauth-1.0a');
 const crypto = require('crypto');
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
+
 
 // Dummy data for attendees
 const attendees = [
