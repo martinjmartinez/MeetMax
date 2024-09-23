@@ -12,9 +12,9 @@ const attendees = [
 app.use(express.json());
 
 // API route
-app.get('/attendees', (req, res) => {
-  res.json(attendees);
-});
+app.get('/.netlify/functions/attendees', (req, res) => {
+    res.json(attendees);
+  });
 
 // Correctly export the handler
 module.exports.handler = serverless(app);
