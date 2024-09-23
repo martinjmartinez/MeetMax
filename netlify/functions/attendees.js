@@ -6,19 +6,11 @@ const OAuth = require('oauth-1.0a');
 const crypto = require('crypto');
 const fetch = require('node-fetch');
 
-
-// Dummy data for attendees
-const attendees = [
-  { id: 1, name: 'John Doe', email: 'john@example.com' },
-  { id: 2, name: 'Jane Smith', email: 'jane@example.com' }
-];
-
 // Middleware for JSON body parsing
 app.use(express.json());
 
 // API route
 app.get('/.netlify/functions/attendees', async (req, res) => {
-    // Set up OAuth using consumer key and secret only (no token)
   const oauth = OAuth({
     consumer: {
       key: 'igapi',  // Your consumer key
@@ -28,46 +20,39 @@ app.get('/.netlify/functions/attendees', async (req, res) => {
     hash_function(baseString, key) {
       return crypto.createHmac('sha1', key).update(baseString).digest('base64');
     },
-});
-    
-const request_data = {
-    url: 'https://www.meetmax.com/sched/service/attendee/list?data_type=XML&event_id=111863', // Replace with the actual OAuth 1.0 endpoint
+  });
+
+  const request_data = {
+    url: 'https://www.meetmax.com/sched/service/attendee/list?data_type=XML&event_id=111863',
     method: 'GET',
   };
 
   try {
-    console.log('klk')
+    console.log('Starting request...');
 
-    // Make the request using only the consumer credentials (no token)
     const response = await fetch(request_data.url, {
       method: request_data.method,
       headers: {
         ...oauth.toHeader(oauth.authorize(request_data)),
       },
     });
-    console.log('klk 2')
+
+    console.log('Response received');
 
     if (!response.ok) {
       throw new Error(`Error: ${response.statusText}`);
     }
 
     const xmlData = await response.text();
-    console.log('klk 3', xmlData)
-    return {
-      statusCode: 200,
-      body: xmlData,
-    //   body: data,
+    console.log('Data retrieved:', xmlData);
 
-    };
+    // Send the response back to the client
+    res.status(200).send(xmlData);
   } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: error.message }),
-    };
+    console.error('Error occurred:', error.message);
+    res.status(500).send(JSON.stringify({ error: error.message }));
   }
-
-    // res.json(attendees);
-  });
+});
 
 // Correctly export the handler
 module.exports.handler = serverless(app);
