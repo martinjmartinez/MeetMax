@@ -52,8 +52,8 @@ const request_data = {
 
     return {
       statusCode: 200,
-    //   body: JSON.stringify(data),
-      body: data,
+      body: JSON.stringify(data),
+    //   body: data,
 
     };
   } catch (error) {
