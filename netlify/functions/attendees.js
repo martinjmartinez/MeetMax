@@ -9,8 +9,14 @@ const fetch = require('node-fetch');
 // Middleware for JSON body parsing
 app.use(express.json());
 
-// API route
+// API route with query parameters
 app.get('/.netlify/functions/attendees', async (req, res) => {
+  const { event_id, data_type, search_fld, search_for } = req.query; // Destructure query params
+
+  if (!event_id) {
+    return res.status(400).send({ error: 'Missing event_id parameter' });
+  }
+
   const oauth = OAuth({
     consumer: {
       key: 'igapi',  // Your consumer key
@@ -22,13 +28,22 @@ app.get('/.netlify/functions/attendees', async (req, res) => {
     },
   });
 
+  // Construct the URL with dynamic parameters
+  let url =`https://www.meetmax.com/sched/service/attendee/list?data_type=${data_type || 'XML'}&event_id=${event_id}`
+    // Add optional parameters if they are present
+    if (search_fld) {
+        url += `&search_fld=${search_fld}`;
+      }
+    if (search_for) {
+        url += `&search_for=${search_for}`;
+    }
   const request_data = {
-    url: 'https://www.meetmax.com/sched/service/attendee/list?data_type=XML&event_id=111863',
+    url: url,
     method: 'GET',
   };
 
   try {
-    console.log('Starting request...');
+    console.log('Making request to:', request_data.url);
 
     const response = await fetch(request_data.url, {
       method: request_data.method,
@@ -36,8 +51,6 @@ app.get('/.netlify/functions/attendees', async (req, res) => {
         ...oauth.toHeader(oauth.authorize(request_data)),
       },
     });
-
-    console.log('Response received');
 
     if (!response.ok) {
       throw new Error(`Error: ${response.statusText}`);
