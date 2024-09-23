@@ -29,7 +29,7 @@ app.get('/.netlify/functions/attendees', async (req, res) => {
   });
 
   // Construct the URL with dynamic parameters
-  let url =`https://www.meetmax.com/sched/service/attendee/list?data_type=${data_type || 'XML'}&event_id=${event_id}`
+  let url =`https://www.meetmax.com/sched/service/attendee/list?data_type=${data_type}&event_id=${event_id}`
     // Add optional parameters if they are present
     if (search_fld) {
         url += `&search_fld=${search_fld}`;
@@ -56,11 +56,17 @@ app.get('/.netlify/functions/attendees', async (req, res) => {
       throw new Error(`Error: ${response.statusText}`);
     }
 
-    const xmlData = await response.text();
-    console.log('Data retrieved:', xmlData);
+    let responseData;
+    if (data_type === 'JSON') {
+      responseData = await response.json();
+      console.log('JSON data retrieved:', responseData);
+    } else if (data_type === 'XML') {
+      responseData = await response.text(); // Assume XML by default
+      console.log('XML data retrieved:', responseData);
+    }
 
     // Send the response back to the client
-    res.status(200).send(xmlData);
+    res.status(200).send(responseData);
   } catch (error) {
     console.error('Error occurred:', error.message);
     res.status(500).send(JSON.stringify({ error: error.message }));
