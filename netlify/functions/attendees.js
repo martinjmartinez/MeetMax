@@ -80,6 +80,7 @@ app.get("/.netlify/functions/attendees/add_company", async (req, res) => {
     last,
     company,
     attendee_role_id,
+    data_type,
     is_entity,
     attendee_type,
     virtual,
@@ -101,7 +102,7 @@ app.get("/.netlify/functions/attendees/add_company", async (req, res) => {
   });
 
   // Construct the URL with dynamic parameters
-  let url = `https://www.meetmax.com/sched/service/attendee/add?event_id=${event_id}&first=${first}&last=${last}&company=${company}&attendee_role_id=${attendee_role_id}&is_entity="Y"&attendee_type="E"&virtual="Y"`;
+  let url = `https://www.meetmax.com/sched/service/attendee/add?event_id=${event_id}&data_type=${data_type}&first=${first}&last=${last}&company=${company}&attendee_role_id=${attendee_role_id}&is_entity="Y"&attendee_type="E"&virtual="Y"`;
   // Add optional parameters if they are present
   if (search_fld) {
     url += `&search_fld=${search_fld}`;
@@ -151,6 +152,7 @@ app.get("/.netlify/functions/attendees/add_attendee", async (req, res) => {
     first,
     last,
     company,
+    data_type,
     attendee_role_id,
     x_profile_picture,
     x_profile_bio,
@@ -186,7 +188,7 @@ app.get("/.netlify/functions/attendees/add_attendee", async (req, res) => {
   });
 
   // Construct the URL with dynamic parameters
-  let url = `https://www.meetmax.com/sched/service/attendee/add?event_id=${event_id}&first=${first}&last=${last}&company=${company}&attendee_role_id=${attendee_role_id}`;
+  let url = `https://www.meetmax.com/sched/service/attendee/add?event_id=${event_id}&first=${first}&last=${last}&company=${company}&attendee_role_id=${attendee_role_id}&data_type=${data_type}`;
   // Add optional parameters if they are present
   if (x_profile_picture) {
     url += `&x_profile_picture=${x_profile_picture}`;
