@@ -80,10 +80,7 @@ app.get("/.netlify/functions/attendees/add_company", async (req, res) => {
     last,
     company,
     attendee_role_id,
-    data_type,
-    is_entity,
-    attendee_type,
-    virtual,
+    data_type
   } = req.query; // Destructure query params
 
   if (!event_id) {
@@ -103,13 +100,7 @@ app.get("/.netlify/functions/attendees/add_company", async (req, res) => {
 
   // Construct the URL with dynamic parameters
   let url = `https://www.meetmax.com/sched/service/attendee/add?event_id=${event_id}&data_type=${data_type}&first=${first}&last=${last}&company=${company}&attendee_role_id=${attendee_role_id}&is_entity="Y"&attendee_type="E"&virtual="Y"`;
-  // Add optional parameters if they are present
-  if (search_fld) {
-    url += `&search_fld=${search_fld}`;
-  }
-  if (search_for) {
-    url += `&search_for=${search_for}`;
-  }
+
   const request_data = {
     url: url,
     method: "GET",
