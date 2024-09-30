@@ -145,6 +145,8 @@ app.get("/.netlify/functions/attendees/add_attendee", async (req, res) => {
     company,
     data_type,
     attendee_role_id,
+    username,
+    password,
     x_profile_picture,
     x_profile_bio,
     x_bio,
@@ -213,6 +215,10 @@ app.get("/.netlify/functions/attendees/add_attendee", async (req, res) => {
     url += `&x_bestsuit=${x_bestsuit}`;
   } else if (x_sponstopic) {
     url += `&x_sponstopic=${x_sponstopic}`;
+  } else if (username) {
+    url += `&username=${username}`;
+  } else if (password) {
+    url += `&password=${password}`;
   }
   const request_data = {
     url: url,
