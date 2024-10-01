@@ -165,10 +165,6 @@ app.get("/.netlify/functions/attendees/add_attendee", async (req, res) => {
     x_sponstopic,
   } = req.query; // Destructure query params
 
-  if (!event_id) {
-    return res.status(400).send({ error: "Missing event_id parameter" });
-  }
-
   const oauth = OAuth({
     consumer: {
       key: "igapi", // Your consumer key
