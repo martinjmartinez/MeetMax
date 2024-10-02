@@ -99,7 +99,7 @@ app.get("/.netlify/functions/attendees/add_company", async (req, res) => {
   });
 
   // Construct the URL with dynamic parameters
-  let url = `https://www.meetmax.com/sched/service/attendee/add?event_id=${event_id}&data_type=${data_type}&first=${first}&last=${last}&company=${company}&attendee_role_id=${attendee_role_id}&is_entity="Y"&attendee_type="E"&virtual="Y"`;
+  let url = `https://www.meetmax.com/sched/service/attendee/add?event_id=${event_id}&data_type=${data_type}&first=${first}&last=${last}&company=${company}&attendee_role_id=${attendee_role_id}&is_entity=Y&attendee_type=E`;
 
   const request_data = {
     url: url,
