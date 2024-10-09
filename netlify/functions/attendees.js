@@ -196,7 +196,8 @@ app.get("/.netlify/functions/attendees/add_attendee", async (req, res) => {
   } else if (x_products) {
     url += `&x_products=${x_products}`;
   } else if (x_productserv) {
-    url += `&x_productserv=${x_productserv}`;
+    let encodedValue = encodeURIComponent(x_productserv);
+    url += `&x_productserv=${encodedValue}`;
   } else if (x_exusbuis) {
     url += `&x_exusbuis=${x_exusbuis}`;
   } else if (x_logo) {
