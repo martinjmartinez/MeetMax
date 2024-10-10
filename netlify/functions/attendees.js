@@ -180,38 +180,38 @@ app.get("/.netlify/functions/attendees/add_attendee", async (req, res) => {
   let url = `https://www.meetmax.com/sched/service/attendee/add?event_id=${event_id}&first=${first}&last=${last}&company=${company}&attendee_role_id=${attendee_role_id}&data_type=${data_type}`;
   // Add optional parameters if they are present
   if (x_profile_picture) {
-    url += `&x_profile_picture=${x_profile_picture}`;
+    url += `&custom_22900=${x_profile_picture}`;
   } else if (x_profile_bio) {
-    url += `&x_profile_bio=${x_profile_bio}`;
+    url += `&custom_22192=${x_profile_bio}`;
   } else if (x_bio) {
-    url += `&x_bio=${x_bio}`;
+    url += `&custom_22300=${x_bio}`;
   } else if (x_stores) {
-    url += `&x_stores=${x_stores}`;
+    url += `&custom_22301=${x_stores}`;
   } else if (x_newstores) {
-    url += `&x_newstores=${x_newstores}`;
+    url += `&custom_22302=${x_newstores}`;
   } else if (x_remodel) {
-    url += `&x_remodel=${x_remodel}`;
+    url += `&custom_22303=${x_remodel}`;
   } else if (x_init) {
-    url += `&x_init=${x_init}`;
+    url += `&custom_22304=${x_init}`;
   } else if (x_products) {
-    url += `&x_products=${x_products}`;
+    url += `&custom_22305=${x_products}`;
   } else if (x_productserv) {
     let encodedValue = encodeURIComponent(x_productserv);
-    url += `&x_productserv=${encodedValue}`;
+    url += `&custom_22306=${encodedValue}`;
   } else if (x_exusbuis) {
-    url += `&x_exusbuis=${x_exusbuis}`;
+    url += `&custom_22307=${x_exusbuis}`;
   } else if (x_logo) {
-    url += `&x_logo=${x_logo}`;
+    url += `&custom_22308=${x_logo}`;
   } else if (x_website) {
-    url += `&x_website=${x_website}`;
+    url += `&custom_22309=${x_website}`;
   } else if (x_servloc) {
-    url += `&x_servloc=${x_servloc}`;
+    url += `&custom_22310=${x_servloc}`;
   } else if (x_producservic) {
-    url += `&x_producservic=${x_producservic}`;
+    url += `&custom_22311=${x_producservic}`;
   } else if (x_bestsuit) {
-    url += `&x_bestsuit=${x_bestsuit}`;
+    url += `&custom_22312=${x_bestsuit}`;
   } else if (x_sponstopic) {
-    url += `&x_sponstopic=${x_sponstopic}`;
+    url += `&custom_22432=${x_sponstopic}`;
   } else if (username) {
     url += `&username=${username}`;
   } else if (password) {
