@@ -196,8 +196,11 @@ app.get("/.netlify/functions/attendees/add_attendee", async (req, res) => {
   } else if (x_products) {
     url += `&custom_22305=${x_products}`;
   } else if (x_productserv) {
-    let encodedValue = encodeURIComponent(x_productserv);
-    url += `&custom_22306=${encodedValue}`;
+    const tempArray = x_productserv.split(',')
+    tempArray.forEach(element => {
+      url += `&custom_22306=${element}`;
+    });
+    // let encodedValue = encodeURIComponent(x_productserv);
   } else if (x_exusbuis) {
     url += `&custom_22307=${x_exusbuis}`;
   } else if (x_logo) {
@@ -209,7 +212,10 @@ app.get("/.netlify/functions/attendees/add_attendee", async (req, res) => {
   } else if (x_producservic) {
     url += `&custom_22311=${x_producservic}`;
   } else if (x_bestsuit) {
-    url += `&custom_22312=${x_bestsuit}`;
+    const tempArray = x_bestsuit.split(',')
+    tempArray.forEach(element => {
+      url += `&custom_22312=${element}`;
+    });
   } else if (x_sponstopic) {
     url += `&custom_22432=${x_sponstopic}`;
   } else if (username) {
